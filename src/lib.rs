@@ -57,6 +57,12 @@ impl Server {
             }
         }
 
+        let mut slug = "";
+        let path_segments: Vec<&str> = path.split('/').collect();
+        if path_segments.len() > 2 {
+            slug = path_segments[2]; 
+        }
+
         let body_params: Vec<&str> = request_parts[1].split('&').collect();
         for part in body_params {
             let kv: Vec<&str> = part.split("=").collect();
