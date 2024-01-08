@@ -1,6 +1,3 @@
-طبعًا، يمكننا إضافة استخدام الـ "slugs" إلى الـ Readme. سأقوم بتعديل الـ Readme ليشرح كيفية استخدام slugs في المكتبة "sandy".
-
-```markdown
 # sandy
 
 This library provides a simple HTTP server and a template rendering engine in Rust.
@@ -20,9 +17,9 @@ let mut server = Server::new();
 You can run the HTTP server using the `Server.run()` function.
 
 ```rust
-let ip = "127.0.0.1"
-let port = "8080"
-server.run(ip, port)
+let ip = "127.0.0.1";
+let port = "8080";
+server.run(ip, port);
 ```
 
 ## Routing with Slugs

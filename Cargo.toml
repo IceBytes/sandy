@@ -1,6 +1,6 @@
 [package]
 name = "sandy"
-version = "0.2.4"
+version = "0.2.5"
 edition = "2021"
 authors = ["MrAws.developer@gmai.com"]
 description = "A simple HTTP server and template rendering engine in Rust."
