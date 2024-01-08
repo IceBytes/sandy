@@ -5,6 +5,7 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 use regex::Regex;
 use std::fs;
+use tera::{Context, Tera};
 
 pub struct Server {
     routes: HashMap<String, Arc<Mutex<dyn Fn(&str, HashMap<String, String>, &str, HashMap<String, String>) -> Result<String, String> + Send + Sync>>>,
@@ -98,36 +99,35 @@ impl Server {
     }
 }
 
-
 pub struct TemplateEngine;
 
 impl TemplateEngine {
     pub fn render(template: &str, context: &HashMap<&str, &str>) -> String {
-        let re = Regex::new(r"\{\{\s*(\w+)\s*\}\}").unwrap();
-        let result = re.replace_all(template, |captures: &regex::Captures| {
-            let var = captures.get(1).unwrap().as_str();
-            match context.get(var) {
-                Some(val) => val.to_string(),
-                None => captures.get(0).unwrap().as_str().to_string(),
-            }
-        });
-        result.into_owned()
+        let mut tera = Tera::default();
+        tera.add_raw_template("template", template).unwrap();
+
+        let mut ctx = Context::new();
+        for (key, val) in context {
+            ctx.insert(*key, val);
+        }
+
+        tera.render("template", &ctx).unwrap()
     }
 
     pub fn render_template(template_name: &str, context: &HashMap<&str, &str>) -> Result<String, String> {
-        let file_content = match fs::read_to_string(format!("templates/{}", template_name)) {
+        let file_content = match std::fs::read_to_string(format!("templates/{}", template_name)) {
             Ok(content) => content,
             Err(_) => return Err("Template file not found".to_string()),
         };
-    
-        let re = Regex::new(r"\{\{\s*(\w+)\s*\}\}").unwrap();
-        let result = re.replace_all(&file_content, |captures: &regex::Captures| {
-            let var = captures.get(1).unwrap().as_str();
-            match context.get(var) {
-                Some(val) => val.to_string(),
-                None => captures.get(0).unwrap().as_str().to_string(),
-            }
-        });
-            Ok(result.into_owned())
+
+        let mut tera = Tera::default();
+        tera.add_raw_template("template", &file_content).unwrap();
+
+        let mut ctx = Context::new();
+        for (key, val) in context {
+            ctx.insert(*key, val);
+        }
+
+        tera.render("template", &ctx).map_err(|e| e.to_string())
     }
 }

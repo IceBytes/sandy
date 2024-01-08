@@ -153,7 +153,7 @@ fn main() {
         Ok(format!("HTTP/1.1 200 OK\n\n{}", rendered))
     });
 
-    // if you wanna add CSS files to your project, just include those files in your code like you would any other route
+    // if you wanna add CSS files to your project, just include those files in your code like you would any other route.
     
     server.run("0.0.0.0", "8080");
 }

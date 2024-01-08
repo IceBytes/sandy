@@ -1,7 +1,7 @@
 [package]
 name = "sandy"
 <<<<<<< HEAD
-version = "0.2.2"
+version = "0.2.3"
 =======
 version = "0.2.1"
 >>>>>>> b43e48773dd1f25b5bafb44022fab58728e54c57
@@ -14,8 +14,9 @@ keywords = ["sandy", "http", "server", "template-engine", "backend"]
 readme = "README.md"
 
 [package.metadata]
-keywords = ["rust", "http", "server", "template-engine", "backend", "api", "sandy"]
+keywords = ["rust", "http", "server", "template-engine", "backend", "api", "sandy", "web"]
 
 [dependencies]
 tokio = { version = "1", features = ["full"] }
 regex = "1.10.2"
+tera = "1.19.1"
