@@ -1,0 +1,17 @@
+[package]
+name = "sandy"
+version = "0.2.2"
+edition = "2021"
+authors = ["MrAws.developer@gmai.com"]
+description = "A simple HTTP server and template rendering engine in Rust."
+repository = "https://github.com/IceBytes/sandy"
+license = "MIT"
+keywords = ["sandy", "http", "server", "template-engine", "backend"]
+readme = "README.md"
+
+[package.metadata]
+keywords = ["rust", "http", "server", "template-engine", "backend", "api", "sandy"]
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+regex = "1.10.2"
