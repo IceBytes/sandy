@@ -1,6 +1,3 @@
-طبعًا، يمكننا إضافة استخدام الـ "slugs" إلى الـ Readme. سأقوم بتعديل الـ Readme ليشرح كيفية استخدام slugs في المكتبة "sandy".
-
-```markdown
 # sandy
 
 This library provides a simple HTTP server and a template rendering engine in Rust.
