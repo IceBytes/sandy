@@ -39,11 +39,11 @@ server.route("/", |path, params, method, data| {
 To handle a GET request, use the following:
 
 ```rust
-server.route("/get", |path, params, method, data| {
+server.route("/get", |_, params, method, _| {
     if method == "GET" {
-        let v = params.get("param").unwrap_or(&"".to_string());
+        let v = params.get("param").map_or_else(|| "".to_string(), |x| x.to_string());
         Ok(format!("HTTP/1.1 200 OK\n\n{}", v))
-    } else {
+        } else {
         Err("HTTP/1.1 405 METHOD NOT ALLOWED\n\nMethod Not Allowed".to_string())
     }
 });
@@ -54,9 +54,9 @@ server.route("/get", |path, params, method, data| {
 To handle a POST request, use the following:
 
 ```rust
-server.route("/post", |path, params, method, data| {
+server.route("/post", |_, _, method, data| {
     if method == "POST" {
-        let v = data.get("data").unwrap_or(&"".to_string());
+        let v = data.get("data").map_or_else(|| "".to_string(), |x| x.to_string());
         Ok(format!("HTTP/1.1 200 OK\n\n{}", v))
     } else {
         Err("HTTP/1.1 405 METHOD NOT ALLOWED\n\nMethod Not Allowed".to_string())
@@ -69,8 +69,7 @@ server.route("/post", |path, params, method, data| {
 You can render templates using the `TemplateEngine::render_template()` function.
 
 ```rust
-use sandy
-::TemplateEngine;
+use sandy::TemplateEngine;
 use std::collections::HashMap;
 
 let mut context = HashMap::new();
@@ -93,8 +92,7 @@ All route handler functions should return a `Result<String, String>` where `Ok` 
 For example:
 
 ```rust
-Ok("HTTP/1.1 200 OK\n\nHello, sandy
-".to_string())
+Ok("HTTP/1.1 200 OK\n\nHello, sandy".to_string())
 ```
 
 ```rust
@@ -110,6 +108,10 @@ Err("HTTP/1.1 405 METHOD NOT ALLOWED\n\nMethod Not Allowed".to_string())
 example of use all features in the library
 
 ```rust
+use sandy::Server;
+use sandy::TemplateEngine;
+use std::collections::HashMap;
+
 fn main() {
     let mut server = Server::new();
 
@@ -120,7 +122,7 @@ fn main() {
 
     server.route("/get", |_, params, method, _| {
         if method == "GET" {
-            let v = params.get("param").unwrap_or(&"".to_string());
+            let v = params.get("param").map_or_else(|| "".to_string(), |x| x.to_string());
             Ok(format!("HTTP/1.1 200 OK\n\n{}", v))
         } else {
             Err("HTTP/1.1 405 METHOD NOT ALLOWED\n\nMethod Not Allowed".to_string())
@@ -129,33 +131,31 @@ fn main() {
 
     server.route("/post", |_, _, method, data| {
         if method == "POST" {
-            let v = data.get("data").unwrap_or(&"".to_string());
+            let v = data.get("data").map_or_else(|| "".to_string(), |x| x.to_string());
             Ok(format!("HTTP/1.1 200 OK\n\n{}", v))
         } else {
             Err("HTTP/1.1 405 METHOD NOT ALLOWED\n\nMethod Not Allowed".to_string())
         }
     });
-
-    // all template files must be in "templates" folder
-    let template_content = "<p>Hello, {{ name }}!</p>";
-    let mut context = HashMap::new();
-    context.insert("name", "Aws");
-
-    server.route("/render_template", move |_, _, _, _| {
-        let rendered = TemplateEngine::render_template("template.html", &context);
-        match rendered {
-            Ok(result) => Ok(format!("HTTP/1.1 200 OK\n\n{}", result)),
-            Err(err) => Err(format!("HTTP/1.1 500 INTERNAL SERVER ERROR\n\n{}", err)),
+    
+    server.route("/render_template", |_, _, _, _| {
+        let context: HashMap<_, _> = [("var", "value")].iter().cloned().collect();
+        match TemplateEngine::render_template("template.html", &context) {
+            Ok(rendered) => Ok(format!("HTTP/1.1 200 OK\n\n{}", rendered)),
+            Err(err) => Err(format!("HTTP/1.1 500 Internal Server Error\n\n{}", err)),
         }
     });
 
-    server.route("/render", move |_, _, _, _| {
-        let rendered = TemplateEngine::render(template_content, &context);
+    server.route("/render", |_, _, _, _| {
+        let context: HashMap<_, _> = [("var", "value")].iter().cloned().collect();
+        let template = "This is a {{ var }} template.";
+        let rendered = TemplateEngine::render(template, &context);
         Ok(format!("HTTP/1.1 200 OK\n\n{}", rendered))
     });
 
     // if you wanna add CSS files to your project, just include those files in your code like you would any other route
-    server.run("127.0.0.1", "8080");
+    
+    server.run("0.0.0.0", "8080");
 }
 ```
 "# sandy" 
