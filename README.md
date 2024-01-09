@@ -110,6 +110,8 @@ let rendered = TemplateEngine::render(template, &context);
 
 ## Sitemap
 
+### To add a custom dynamic route to sitemap
+
 The `Server` also supports generating and updating a sitemap for SEO purposes. You can add routes to the sitemap using `add_route_to_sitemap()`:
 
 ```rust
@@ -117,6 +119,18 @@ let ip = "127.0.0.1";
 let port = "8080";
 server.add_route_to_sitemap("/about", true, "daily", 0.5, &format!("http://{}:{}", ip, port));
 ```
+
+### To add all static routes to sitemap
+
+The `Server` also supports generating and updating a sitemap for SEO purposes. You can add routes to the sitemap using `generate_sitemap()`:
+
+```rust
+server.add_route_to_sitemap("/", true, "daily", 0.8, "https://example.com");
+server.add_route_to_sitemap("/about", true, "monthly", 0.5, "https://example.com");
+
+server.generate_sitemap(true, true, "daily", 0.7, "https://example.com");
+```
+
 
 ## Static Routes
 
