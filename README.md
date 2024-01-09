@@ -101,6 +101,7 @@ let mut context = HashMap::new();
 context.insert("name", "Just Ice");
 
 let rendered = TemplateEngine::render_template("template.html", &context);
+
 ```
 
 The `TemplateEngine::render()` function renders templates from strings using a context:
