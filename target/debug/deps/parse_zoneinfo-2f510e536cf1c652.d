@@ -1,0 +1,11 @@
+C:\Users\aws\Downloads\hermit\target\debug\deps\libparse_zoneinfo-2f510e536cf1c652.rmeta: C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\lib.rs C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\line.rs C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\structure.rs C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\table.rs C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\transitions.rs
+
+C:\Users\aws\Downloads\hermit\target\debug\deps\libparse_zoneinfo-2f510e536cf1c652.rlib: C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\lib.rs C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\line.rs C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\structure.rs C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\table.rs C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\transitions.rs
+
+C:\Users\aws\Downloads\hermit\target\debug\deps\parse_zoneinfo-2f510e536cf1c652.d: C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\lib.rs C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\line.rs C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\structure.rs C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\table.rs C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\transitions.rs
+
+C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\lib.rs:
+C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\line.rs:
+C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\structure.rs:
+C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\table.rs:
+C:\Users\aws\.cargo\registry\src\index.crates.io-6f17d22bba15001f\parse-zoneinfo-0.3.0\src\transitions.rs:
