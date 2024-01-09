@@ -8,6 +8,8 @@ Sandy is a Rust library that provides a simple HTTP server and a template render
 - [Routing with Slugs](#routing-with-slugs)
 - [Handling Different HTTP Request Types](#handling-different-http-request-types)
 - [Template Engine Usage](#template-engine-usage)
+- [Sitemap](#sitemap)
+- [Static Routes](#static-routes)
 - [Full Example](#full-example)
 
 ## Server Usage
