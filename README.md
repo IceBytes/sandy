@@ -1,10 +1,18 @@
-# sandy
+# Sandy
 
-This library provides a simple HTTP server and a template rendering engine in Rust.
+Sandy is a Rust library that provides a simple HTTP server and a template rendering engine. It allows easy creation of HTTP servers and handling of different routes while enabling template rendering for web applications.
+
+## Table of Contents
+
+- [Server Usage](#server-usage)
+- [Routing with Slugs](#routing-with-slugs)
+- [Handling Different HTTP Request Types](#handling-different-http-request-types)
+- [Template Engine Usage](#template-engine-usage)
+- [Full Example](#full-example)
 
 ## Server Usage
 
-You can create a new HTTP server using the `Server::new()` function.
+You can create a new HTTP server using the `Server::new()` function:
 
 ```rust
 use sandy::Server;
@@ -12,9 +20,7 @@ use sandy::Server;
 let mut server = Server::new();
 ```
 
-## Server run
-
-You can run the HTTP server using the `Server.run()` function.
+You can run the HTTP server using the `Server.run()` function:
 
 ```rust
 let ip = "127.0.0.1";
@@ -24,7 +30,7 @@ server.run(ip, port);
 
 ## Routing with Slugs
 
-To handle different routes including slugs, use the `route()` method. You can define routes with slugs and their corresponding handler functions.
+To handle different routes, including slugs, use the `route()` method. You can define routes with slugs and their corresponding handler functions.
 
 For instance, to handle a route with a slug:
 
@@ -83,7 +89,7 @@ server.route("/post/:data", |_, _, method, data| {
 
 ## Template Engine Usage
 
-You can render templates using the `TemplateEngine::render_template()` function.
+You can render templates using the `TemplateEngine::render_template()` function:
 
 ```rust
 use sandy::TemplateEngine;
@@ -95,29 +101,29 @@ context.insert("name", "Just Ice");
 let rendered = TemplateEngine::render_template("template.html", &context);
 ```
 
-The `TemplateEngine::render()` function renders templates from strings using a context.
+The `TemplateEngine::render()` function renders templates from strings using a context:
 
 ```rust
 let template = "<p>Hello, {{ name }}!</p>";
 let rendered = TemplateEngine::render(template, &context);
 ```
 
-## Response
+## Sitemap
 
-All route handler functions should return a `Result<String, String>` where `Ok` represents a successful response and `Err` represents an error message.
-
-For example:
+The `Server` also supports generating and updating a sitemap for SEO purposes. You can add routes to the sitemap using `add_route_to_sitemap()`:
 
 ```rust
-Ok("HTTP/1.1 200 OK\n\nHello, sandy".to_string())
+let ip = "127.0.0.1";
+let port = "8080";
+server.add_route_to_sitemap("/about", true, "daily", 0.5, &format!("http://{}:{}", ip, port));
 ```
 
-```rust
-Err("HTTP/1.1 404 OK\n\nPath Not Found".to_string())
-```
+## Static Routes
+
+You can serve static content by defining static routes. For example, serving a static HTML file:
 
 ```rust
-Err("HTTP/1.1 405 METHOD NOT ALLOWED\n\nMethod Not Allowed".to_string())
+server.static_route("/", "<html><body><h1>Welcome to Sandy!</h1></body></html>");
 ```
 
 ## Full Example
@@ -133,7 +139,7 @@ fn main() {
     let mut server = Server::new();
 
     server.route("/", |_, _, _, _| {
-        Ok("HTTP/1.1 200 OK\n\nHello, sandy".to_string())
+        Ok("HTTP/1.1 200 OK\n\nHello, Sandy!".to_string())
     });
 
     server.route("/get/:param", |_, params, method, _| {
@@ -153,7 +159,7 @@ fn main() {
             Err("HTTP/1.1 405 METHOD NOT ALLOWED\n\nMethod Not Allowed".to_string())
         }
     });
-    
+
     server.route("/render_template/:var", |_, _, _, _| {
         let context: HashMap<_, _> = [("var", "value")].iter().cloned().collect();
         match TemplateEngine::render_template("template.html", &context) {
@@ -168,6 +174,10 @@ fn main() {
         let rendered = TemplateEngine::render(template, &context);
         Ok(format!("HTTP/1.1 200 OK\n\n{}", rendered))
     });
+
+    server.static_route("/", "<html><body><h1>Welcome to Sandy!</h1></body></html>");
+
+    server.static_route("/about", "<html><body><h1>About Us</h1><p>This is the About Us page.</p></body></html>");
 
     server.run("0.0.0.0", "8080");
 }
