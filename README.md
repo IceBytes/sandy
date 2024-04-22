@@ -196,9 +196,3 @@ fn main() {
 }
 
 ```
-
-# Projects 
-- https://t.me/IceBytes/Ice-Ctf.git
-
-# Anyone who wants to add his project to the page contact me :
-https://t.me/IceQBits
